@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitors - PC Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    .product-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .product {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .product img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    .cart-container {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      max-width: 250px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .cart-item img {
+      width: 50px;
+      margin-right: 15px;
+    }
+    .cart-total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .cart-actions {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .cart-actions button,
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .cart-actions button:hover,
+    button:hover {
+      background-color: #0056b3;
+    }
+    .remove-item {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .remove-item:hover {
+      background-color: #c0392b;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PC Shop</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+  <main id="shop">
+    <h2>Monitors</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://images.philips.com/is/image/philipsconsumer/b423cee30ff24ce883a4b011004e765b?wid=700&hei=700&$pnglarge$" alt="Monitor 1">
+        <h3>Monitor 1</h3>
+        <p>$150</p>
+        <button onclick="addToCart('Monitor 1', 150, 'https://images.philips.com/is/image/philipsconsumer/b423cee30ff24ce883a4b011004e765b?wid=700&hei=700&$pnglarge$')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://www.mobilepixels.us/cdn/shop/files/23.8MonitorPI11.png?crop=center&height=1200&v=1695718169&width=1200" alt="Monitor 2">
+        <h3>Monitor 2</h3>
+        <p>$200</p>
+        <button onclick="addToCart('Monitor 2', 200, 'https://www.mobilepixels.us/cdn/shop/files/23.8MonitorPI11.png?crop=center&height=1200&v=1695718169&width=1200')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://images.philips.com/is/image/philipsconsumer/2c568b576b2044eb9da1b01f012a0484?wid=700&hei=700&$pnglarge$" alt="Monitor 3">
+        <h3>Monitor 3</h3>
+        <p>$180</p>
+        <button onclick="addToCart('Monitor 3', 180, 'https://images.philips.com/is/image/philipsconsumer/2c568b576b2044eb9da1b01f012a0484?wid=700&hei=700&$pnglarge$')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://easypc.com.ph/cdn/shop/files/Xiaomi_Redmi_G34WQ_180HZ_WQHD_Curved_Gaming_Monitor-b_2048x.png?v=1712113059" alt="Monitor 4">
+        <h3>Monitor 4</h3>
+        <p>$220</p>
+        <button onclick="addToCart('Monitor 4', 220, 'https://easypc.com.ph/cdn/shop/files/Xiaomi_Redmi_G34WQ_180HZ_WQHD_Curved_Gaming_Monitor-b_2048x.png?v=1712113059')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://www.lg.com/content/dam/channel/wcms/ph/monitors/ultragear-gaming/34gs95qe-b/gallery/ultragear-34gs95qe-gallery-02-2010.jpg/_jcr_content/renditions/thum-1600x1062.jpeg" alt="Monitor 5">
+        <h3>Monitor 5</h3>
+        <p>$250</p>
+        <button onclick="addToCart('Monitor 5', 250, 'https://www.lg.com/content/dam/channel/wcms/ph/monitors/ultragear-gaming/34gs95qe-b/gallery/ultragear-34gs95qe-gallery-02-2010.jpg/_jcr_content/renditions/thum-1600x1062.jpeg')">Add to Cart</button>
+      </div>
+    </div>
+    <div class="cart-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total" id="cart-total">Total: $0.00</div>
+      <div class="cart-actions">
+        <button onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 PC Shop. All rights reserved.</p>
+  </footer>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function addToCart(name, price, image) {
+      cart.push({ name, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      updateCartItems();
+      alert(`${name} has been added to the cart!`);
+    }
+
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    function updateCartItems() {
+      const cartItemsContainer = document.getElementById("cart-items");
+      const cartTotalContainer = document.getElementById("cart-total");
+
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+
+      cart.forEach(item => {
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.classList.add("cart-item");
+        cartItemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <span>${item.name}</span>
+          <span>$${item.price.toFixed(2)}</span>
+          <button class="remove-item" onclick="removeFromCart('${item.name}')">Remove</button>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+        total += item.price;
+      });
+
+      cartTotalContainer.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartItems();
+      updateCartCount();
+      alert(`${name} has been removed from your cart!`);
+    }
+
+    function checkout() {
+      alert('Proceeding to checkout...');
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCartCount();
+      updateCartItems();
+    });
+  </script>
+</body>
+</html>

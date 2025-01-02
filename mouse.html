@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mice - PC Shop</title>
+  <style>
+    /* CSS Code */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .product-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .product {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+
+    .cart-container {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      position: fixed;
+      top: 50%;  /* Position it vertically in the middle */
+      right: 0;  /* Align to the right side of the screen */
+      transform: translateY(-50%);  /* Adjust the position to perfectly center it */
+      max-width: 250px;  /* Set a smaller width */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;  /* Ensure it stays on top of other content */
+      overflow-y: auto;  /* Allow scrolling if content exceeds the container */
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .cart-item img {
+      width: 50px;
+      margin-right: 15px;
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .cart-actions {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .cart-actions button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cart-actions button:hover {
+      background-color: #0056b3;
+    }
+
+    .remove-item {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .remove-item:hover {
+      background-color: #c0392b;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 0.5px;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PC Shop</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+  <main id="shop">
+    <h2>Mice</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://hafeezcentreonline.pk/cdn/shop/products/INVADER-M719.jpg?v=1663962681" alt="Mouse 1">
+        <h3>Mouse 1</h3>
+        <p>$25</p>
+        <button onclick="addToCart('Mouse 1', 25, 'https://hafeezcentreonline.pk/cdn/shop/products/INVADER-M719.jpg?v=1663962681')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://www.savio.net.pl/wp-content/uploads/2023/04/symetrical-gaming-mouse-with-rgb-savio-rift-black.jpg" alt="Mouse 2">
+        <h3>Mouse 2</h3>
+        <p>$30</p>
+        <button onclick="addToCart('Mouse 2', 30, 'https://www.savio.net.pl/wp-content/uploads/2023/04/symetrical-gaming-mouse-with-rgb-savio-rift-black.jpg')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://gameone.ph/media/catalog/product/cache/d378a0f20f83637cdb1392af8dc032a2/a/s/asus-m4-wireless-tuf-gaming-mouse-p306-1.jpg" alt="Mouse 3">
+        <h3>Mouse 3</h3>
+        <p>$20</p>
+        <button onclick="addToCart('Mouse 3', 20, 'https://gameone.ph/media/catalog/product/cache/d378a0f20f83637cdb1392af8dc032a2/a/s/asus-m4-wireless-tuf-gaming-mouse-p306-1.jpg')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://www.jbhifi.com.au/cdn/shop/files/598680-Product-0-I-637974588225483899_ea090473-b612-4294-b465-065a1e88c2d7.jpg?v=1721103800" alt="Mouse 4">
+        <h3>Mouse 4</h3>
+        <p>$35</p>
+        <button onclick="addToCart('Mouse 4', 35, 'https://www.jbhifi.com.au/cdn/shop/files/598680-Product-0-I-637974588225483899_ea090473-b612-4294-b465-065a1e88c2d7.jpg?v=1721103800')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://assets2.razerzone.com/images/pnx.assets/608eb80ec16513e41c1a62caf1fb9b55/razer-cobra-pro-hero.webp" alt="Mouse 5">
+        <h3>Mouse 5</h3>
+        <p>$40</p>
+        <button onclick="addToCart('Mouse 5', 40, 'https://assets2.razerzone.com/images/pnx.assets/608eb80ec16513e41c1a62caf1fb9b55/razer-cobra-pro-hero.webp')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61tQG4wWE9L._AC_UF894,1000_QL80_.jpg" alt="Mouse 6">
+        <h3>Mouse 6</h3>
+        <p>$28</p>
+        <button onclick="addToCart('Mouse 6', 28, 'https://m.media-amazon.com/images/I/61tQG4wWE9L._AC_UF894,1000_QL80_.jpg')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://i5.walmartimages.com/seo/Razer-DeathAdder-Essential-Wired-Optical-Gaming-Mouse-for-PC-5-Buttons-Black_318e8fbf-fb2c-4abe-938e-e880a048da19.04fb37fa416bdd014d7178ea776c7054.png" alt="Mouse 7">
+        <h3>Mouse 7</h3>
+        <p>$22</p>
+        <button onclick="addToCart('Mouse 7', 22, 'https://i5.walmartimages.com/seo/Razer-DeathAdder-Essential-Wired-Optical-Gaming-Mouse-for-PC-5-Buttons-Black_318e8fbf-fb2c-4abe-938e-e880a048da19.04fb37fa416bdd014d7178ea776c7054.png')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://www.portronics.com/cdn/shop/files/Artboard1_2b95dd60-aa4a-45ee-8ed0-4b7e8603321e.jpg?v=1702375127" alt="Mouse 8">
+        <h3>Mouse 8</h3>
+        <p>$50</p>
+        <button onclick="addToCart('Mouse 8', 50, 'https://www.portronics.com/cdn/shop/files/Artboard1_2b95dd60-aa4a-45ee-8ed0-4b7e8603321e.jpg?v=1702375127')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsNeXy0UpPgRENMVowqlzLUEwelTJmer--pw&s" alt="Mouse 9">
+        <h3>Mouse 9</h3>
+        <p>$45</p>
+        <button onclick="addToCart('Mouse 9', 45, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsNeXy0UpPgRENMVowqlzLUEwelTJmer--pw&s')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://down-my.img.susercontent.com/file/sg-11134201-22120-ebc0fda31ukv83" alt="Mouse 10">
+        <h3>Mouse 10</h3>
+        <p>$38</p>
+        <button onclick="addToCart('Mouse 10', 38, 'https://down-my.img.susercontent.com/file/sg-11134201-22120-ebc0fda31ukv83')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cart-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total" id="cart-total">Total: $0.00</div>
+      <div class="cart-actions">
+        <button onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 PC Shop. All rights reserved.</p>
+  </footer>
+    <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function addToCart(name, price, image) {
+      // Add item to the cart
+      cart.push({ name, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart)); // Save cart to localStorage
+      updateCartCount(); // Update cart count in header
+      updateCartItems(); // Update items in cart section
+      alert(`${name} has been added to the cart!`); // Confirmation alert
+    }
+
+    function updateCartCount() {
+      const cartCount = document.getElementById('cart-count');
+      cartCount.textContent = cart.length; // Update cart count in header
+    }
+
+    function updateCartItems() {
+      const cartItemsContainer = document.getElementById("cart-items");
+      const cartTotalContainer = document.getElementById("cart-total");
+
+      cartItemsContainer.innerHTML = ""; // Clear previous cart items
+      let total = 0;
+
+      // Loop through cart items and create HTML to display them
+      cart.forEach(item => {
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.classList.add("cart-item");
+        cartItemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <span>${item.name}</span>
+          <span>$${item.price.toFixed(2)}</span>
+          <button class="remove-item" onclick="removeFromCart('${item.name}')">Remove</button>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+        total += item.price;
+      });
+
+      cartTotalContainer.textContent = `Total: $${total.toFixed(2)}`; // Update total price
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name); // Remove item by name
+      localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart to localStorage
+      updateCartItems(); // Update cart section
+      updateCartCount(); // Update cart count
+      alert(`${name} has been removed from your cart!`); // Confirmation alert
+    }
+
+    function checkout() {
+      alert('Proceeding to checkout...');
+      // Add further checkout functionality here if necessary
+    }
+
+    // On page load, update the cart count and items
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCartCount();
+      updateCartItems();
+    });
+  </script>
+</body>
+</html>

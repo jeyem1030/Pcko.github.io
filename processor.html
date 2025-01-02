@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processors - PC Shop</title>
+  <style>
+    /* CSS Code */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    header nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none
+    }
+
+    main {
+      padding: 20px
+    }
+
+    .product-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .product {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+    }
+
+    .product img {
+      max-width: 100%;
+      border-radius: 5px
+    }
+
+    .cart-container {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      max-width: 250px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      overflow-y: auto
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0.
+    }
+
+    .cart-item img {
+      width: 50px;
+      margin-right: 15px
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold
+    }
+
+    .cart-actions {
+      text-align: right;
+      margin-top: 20px
+    }
+
+    .cart-actions button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer
+    }
+
+    .cart-actions button:hover {
+      background-color: #0056b3
+    }
+
+    .remove-item {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer
+    }
+
+    .remove-item:hover {
+      background-color: #c0392b
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer
+    }
+
+    button:hover {
+      background-color: #0056b3
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PC Shop</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+  <main id="shop">
+    <h2>Processors</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://easypc.com.ph/cdn/shop/products/AMD_Ryzen_5_4500_Socket_Am4_3.6GHz_box_processor-c_2048x.jpg?v=1704690801" alt="Processor 1">
+        <h3>Processor 1</h3>
+        <p>$200</p>
+        <button onclick="addToCart('Processor 1', 200, 'https://easypc.com.ph/cdn/shop/products/AMD_Ryzen_5_4500_Socket_Am4_3.6GHz_box_processor-c_2048x.jpg?v=1704690801')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://www.intel.com/content/dam/support/us/en/images/processors/88428-img1.jpg" alt="Processor 2">
+        <h3>Processor 2</h3>
+        <p>$250</p>
+        <button onclick="addToCart('Processor 2', 250, 'https://www.intel.com/content/dam/support/us/en/images/processors/88428-img1.jpg')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHzuyfz68Sj5c_hiShmbkYZG9iM6oEdXAXg&s" alt="Processor 3">
+        <h3>Processor 3</h3>
+        <p>$230</p>
+        <button onclick="addToCart('Processor 3', 230, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHzuyfz68Sj5c_hiShmbkYZG9iM6oEdXAXg&s')">Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="https://media.wired.com/photos/5bbb7e8a1db42174c412121e/master/w_1600%2Cc_limit/9thGen_box_grey.jpg" alt="Processor 4">
+        <h3>Processor 4</h3>
+        <p>$280</p>
+        <button onclick="addToCart('Processor 4', 280, 'https://media.wired.com/photos/5bbb7e8a1db42174c412121e/master/w_1600%2Cc_limit/9thGen_box_grey.jpg')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="cart-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total" id="cart-total">Total: $0.00</div>
+      <div class="cart-actions">
+        <button onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 PC Shop. All rights reserved.</p>
+  </footer>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function addToCart(name, price, image) {
+      // Add item to the cart
+      cart.push({ name, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart)); // Save cart to localStorage
+      updateCartCount(); // Update cart count in header
+      updateCartItems(); // Update items in cart section
+      alert(`${name} has been added to the cart!`); // Confirmation alert
+    }
+
+    function updateCartCount() {
+      const cartCount = document.getElementById('cart-count');
+      cartCount.textContent = cart.length; // Update cart count in header
+    }
+
+    function updateCartItems() {
+      const cartItemsContainer = document.getElementById("cart-items");
+      const cartTotalContainer = document.getElementById("cart-total");
+
+      cartItemsContainer.innerHTML = ""; // Clear previous cart items
+      let total = 0;
+
+      // Loop through cart items and create HTML to display them
+      cart.forEach(item => {
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.classList.add("cart-item");
+        cartItemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <span>${item.name}</span>
+          <span>$${item.price.toFixed(2)}</span>
+          <button class="remove-item" onclick="removeFromCart('${item.name}')">Remove</button>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+        total += item.price;
+      });
+
+      cartTotalContainer.textContent = `Total: $${total.toFixed(2)}`; // Update total price
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name); // Remove item by name
+      localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart to localStorage
+      updateCartItems(); // Update cart section
+      updateCartCount(); // Update cart count
+      alert(`${name} has been removed from your cart!`); // Confirmation alert
+    }
+
+    function checkout() {
+      alert('Proceeding to checkout...');
+      // Add further checkout functionality here if necessary
+    }
+
+    // On page load, update the cart count and items
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCartCount();
+      updateCartItems();
+    });
+  </script>
+</body>
+</html>

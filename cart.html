@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - PC Shop</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* CSS Code */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000; /* Ensure header is above other content */
+    }
+
+    header .search-bar {
+      flex-grow: 1;
+      max-width: 300px;
+    }
+
+    header .search-bar input {
+      width: 100%;
+      padding: 5px;
+    }
+
+    header nav {
+      display: flex;
+    }
+
+    header nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 20px;
+      margin-top: 80px; /* To avoid content being covered by the fixed header */
+    }
+
+    .cart-container {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      display: flex;  /* Make the cart container horizontal */
+      justify-content: space-between;  /* Space out items */
+      width: auto;  /* Make the cart box take the full width of the screen */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;  /* Remove the auto centering, let it take full width */
+    }
+
+    .cart-items {
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+
+    .cart-item img {
+       width: 250px; /* Set a fixed width for the cart images */
+       height: auto; /* Ensure the aspect ratio is maintained */
+       margin-right: 15px; /* Add some space between the image and the text */
+    }
+
+
+    .cart-summary {
+      width: 300px;  /* Adjust this width to match the full cart container */
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .cart-actions {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .cart-actions button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cart-actions button:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PC Shop</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+  <main>
+    <div class="cart-container">
+      <div class="cart-items">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+      </div>
+      <div class="cart-summary">
+        <div class="cart-total" id="cart-total">Total: $0.00</div>
+        <div class="cart-actions">
+          <button>Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 PC Shop. All rights reserved.</p>
+  </footer>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function addToCart(name, price, image) {
+      // Add item to the cart
+      cart.push({ name, price, image });
+      localStorage.setItem("cart", JSON.stringify(cart)); // Save cart to localStorage
+      updateCartCount(); // Update cart count in header
+      updateCartItems(); // Update items in cart section
+      alert(`${name} has been added to the cart!`); // Confirmation alert
+    }
+
+    function updateCartCount() {
+      const cartCount = document.getElementById('cart-count');
+      cartCount.textContent = cart.length; // Update cart count in header
+    }
+
+    function updateCartItems() {
+      const cartItemsContainer = document.getElementById("cart-items");
+      const cartTotalContainer = document.getElementById("cart-total");
+
+      cartItemsContainer.innerHTML = ""; // Clear previous cart items
+      let total = 0;
+
+      // Loop through cart items and create HTML to display them
+      cart.forEach(item => {
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.classList.add("cart-item");
+        cartItemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <span>${item.name}</span>
+          <span>$${item.price.toFixed(2)}</span>
+          <button class="remove-item" onclick="removeFromCart('${item.name}')">Remove</button>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+        total += item.price;
+      });
+
+      cartTotalContainer.textContent = `Total: $${total.toFixed(2)}`; // Update total price
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name); // Remove item by name
+      localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart to localStorage
+      updateCartItems(); // Update cart section
+      updateCartCount(); // Update cart count
+      alert(`${name} has been removed from your cart!`); // Confirmation alert
+    }
+
+    function checkout() {
+      alert('Proceeding to checkout...');
+      // Add further checkout functionality here if necessary
+    }
+
+    // On page load, update the cart count and items
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCartCount();
+      updateCartItems();
+    });
+  </script>
+</body>
+</html>

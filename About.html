@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - PCko</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+        color: #333;
+    }
+
+    header {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    header .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    header nav {
+        display: flex;
+        align-items: center;
+    }
+
+    header nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    header nav ul li {
+        margin-left: 15px;
+    }
+
+    header nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+
+    header .search-bar {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    header .search-bar input {
+        padding: 5px;
+        width: 50%;
+    }
+
+    main {
+        padding: 20px;
+        margin-top: 80px;
+    }
+
+    section#about-us {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 40px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        margin: 20px auto;
+        text-align: justify;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+<body>
+    <header>
+        <div class="logo">PCko</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="about-us">
+            <h2>About Us</h2>
+            <p>PCko is a local computer parts online shop. We provide the best quality components at competitive prices, ensuring your computer builds are top-notch and reliable. Our mission is to empower tech enthusiasts and professionals by offering a vast selection of cutting-edge products, exceptional customer service, and expert advice. Whether you're assembling your first PC or upgrading your current system, PCko is your trusted partner for all things tech.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 PCko. All rights reserved.</p>
+    </footer>
+</body>
+</html>
